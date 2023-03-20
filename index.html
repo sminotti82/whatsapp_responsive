@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="font2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Work+Sans:wght@200&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Whatsapp</title>
+</head>
+<body>
+            <div id="root">
+                 <div class="container">
+                    <header>
+
+                    <!-- /////////////////////////////////////////////////////////////////// -->
+                    <!-- /////////////////////////////////////////////////////////////////// -->
+                    <!-- /////////////////////////////////////////////////////////////////// -->
+
+                         <div class="left">
+                               <div class="imgHeader">
+                                     <img :src="avatarUser" alt="">
+                               </div>
+                                   <div class="nameUser">
+                                        <h2>{{nomeUser}}</h2>
+                                        <span>Stato: bananaaaa</span>
+                                   </div>
+                                        <div class="headerIcons sectionL">
+                                             <i class="fa-solid fa-circle-notch"></i>
+                                             <i class="fa-solid fa-message"></i>
+                                             <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </div>
+                                      
+                         </div>
+
+                    <!-- /////////////////////////////////////////////////////////////////// -->
+                    <!-- /////////////////////////////////////////////////////////////////// -->
+                    <!-- /////////////////////////////////////////////////////////////////// -->
+                         <div class="right">
+
+                              <div class="imgHeader">
+                                        <img :src="contacts[contatore].avatar" alt="">
+                              </div>
+                                   <div class="nameUser">
+                                        <h2>{{contacts[contatore].name}}</h2>
+                                        <span style="color:limegreen">online</span>
+                                   </div>
+                                        <div class="headerIcons">
+                                             <i class="fa-solid fa-circle-notch"></i>
+                                             <i class="fa-solid fa-paperclip"></i>
+                                             <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </div>
+                         </div>
+                    </header>
+
+                    <!-- /////////////////////////////////////////////////////////////////// -->
+                    <!-- /////////////////////////////////////////////////////////////////// -->
+                    <!-- /////////////////////////////////////////////////////////////////// -->
+                    <main>
+                         <div class="left">
+                              <div class="bell">
+                                   <div class="imgHeader bellBox">
+                                        <i class="fa-solid fa-bell-slash"></i>
+                                   </div>
+                                   <h4>Attiva le notifiche</h4>
+                                   <a href="">attiva le notifiche desktop</a>
+                              </div>
+                              <div class="cerca">
+                                   <input type="text" name=""  @keyup="ricerca" v-model="ricercaUtente"  placeholder="cerca contatto" id="">
+                              </div>
+                              <div @click="selected(index)" v-for="(contatto, index) in contacts" :class="contatore==index?'activeUser':''" v-if="contatto.visible==true" class="userBox">
+                                   <div class="boxusers">
+                                        <img :src="contatto.avatar" alt="foto profilo">
+                                   </div>
+                                   <div class="nameBox">
+                                         <span style="color: lime;">stato: <b style="color:rgb(114, 90, 231)">{{contatto.stato}}</b></span><br>
+                                         <span>{{contatore==index?'online':'Ultimo Accesso Alle: '+contatto.lastAccess}}</span>
+                                         <h4>{{contatto.name}}</h4>
+                                         
+                                   </div>
+                              </div>
+                           
+                         </div>
+                         <div class="right">
+                            <div class="containerMex">
+                                 <div v-for="messaggio in contacts[contatore].messages" :class="messaggio.status=='sent'?'inviato':'ricevuto'" class="boxMessaggio">
+                                     <p>
+                                       {{messaggio.text}}
+                                     </p>
+                                     <h5>{{messaggio.date}}</h5>
+                                 </div>
+                            </div>
+                         </div>
+                         <footer>
+                              <div class="box">
+                                   <i class="fa-solid fa-camera"></i>
+                              </div>
+                              <div class="input">
+                                        <input type="text" @keyup.enter="nuovo" placeholder="scrivi il tuo messaggio" v-model="nuovoMessaggio">
+                              </div>
+                              <div class="box">
+                                   <i class="fa-solid fa-microphone-lines"></i>
+                              </div>
+                         </footer>
+                    </main>
+                 </div>
+            </div>
+    <script src="main.js"></script>
+</body>
+</html>
